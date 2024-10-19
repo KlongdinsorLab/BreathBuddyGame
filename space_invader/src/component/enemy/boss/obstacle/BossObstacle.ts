@@ -53,7 +53,7 @@ export class BossObstacle extends Enemy {
 				return
 			}
 
-			if (this.boosterEffect.remainingUses > 0 && !this.isHit) {
+			if (this.boosterEffect?.remainingUses > 0 && !this.isHit) {
 				this.boosterEffect.remainingUses--
 				this.player.activateShield()
 				this.isHit = true
@@ -61,7 +61,7 @@ export class BossObstacle extends Enemy {
 			}
 
 			if (
-				this.boosterEffect.remainingUses > 0 &&
+				this.boosterEffect?.remainingUses > 0 &&
 				this.player.getIsUsedShield() &&
 				!this.isHit
 			) {
@@ -71,7 +71,7 @@ export class BossObstacle extends Enemy {
 			}
 
 			if (
-				this.boosterEffect.remainingUses === 0 &&
+				this.boosterEffect?.remainingUses === 0 &&
 				this.boosterEffect.remainingTime === 0 &&
 				this.player.getIsUsedShield() &&
 				!this.isHit
@@ -83,7 +83,7 @@ export class BossObstacle extends Enemy {
 			}
 
 			if (
-				this.boosterEffect.remainingUses === 0 &&
+				this.boosterEffect?.remainingUses === 0 &&
 				this.boosterEffect.remainingTime > 0 &&
 				!this.player.getIsUsedShield() &&
 				!this.isHit
@@ -94,7 +94,7 @@ export class BossObstacle extends Enemy {
 				return
 			}
 			if (
-				this.boosterEffect.remainingUses === 0 &&
+				this.boosterEffect?.remainingUses === 0 &&
 				this.boosterEffect.remainingTime > 0 &&
 				this.player.getIsUsedShield() &&
 				!this.isHit
@@ -106,7 +106,7 @@ export class BossObstacle extends Enemy {
 			if (!this.isHit) {
 				this.player.setIsHit(true)
 				this.player.damaged()
-				this.score.add(HIT_METEOR_SCORE * this.boosterEffect.hitMeteorScore)
+				this.score.add(HIT_METEOR_SCORE * this.boosterEffect?.hitMeteorScore)
 				this.scene.time.delayedCall(PLAYER_HIT_DELAY_MS, () => {
 					this.player.setIsHit(false)
 					this.player.recovered()
@@ -161,7 +161,9 @@ export class BossObstacle extends Enemy {
 		this.enemy.destroy()
 		// this.soundManager.play(this.enermyDestroyedSound!, true)
 		this.soundEffect.play('rock-destroy')
-		this.score.add(DESTROY_METEOR_SCORE * this.boosterEffect.destroyMeteorScore)
+		this.score.add(
+			DESTROY_METEOR_SCORE * this.boosterEffect?.destroyMeteorScore,
+		)
 	}
 
 	getBody(): Phaser.Types.Physics.Arcade.ImageWithDynamicBody {
