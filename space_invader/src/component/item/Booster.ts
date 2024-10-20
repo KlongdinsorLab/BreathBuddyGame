@@ -5,14 +5,6 @@ import { BULLET_SPEED, MARGIN } from 'config'
 import { Item } from './Item'
 import InhaleGauge from 'component/ui/InhaleGauge'
 
-export const boosterList = [
-	'booster_3waybullet.png',
-	'booster_heal.png',
-	'booster_scoreX2.png',
-	'booster_speedbullet.png',
-	'booster_strongbullet.png',
-]
-
 export class Booster extends Item {
 	// private soundManager: SoundManager
 
@@ -38,7 +30,7 @@ export class Booster extends Item {
 			startingX,
 			-MARGIN,
 			'dropItem',
-            'booster' + boosterIndex + '.png',
+			'booster' + boosterIndex + '.png',
 		)
 
 		const boosterCollider = this.scene.physics.add.overlap(
@@ -48,6 +40,7 @@ export class Booster extends Item {
 				// TODO Player get booster
 				this.scene.tweens.add({ targets: this.item, duration: 200, alpha: 0 })
 				boosterCollider.active = false
+				this.scene.registry.set('isBoosterReceived', true)
 			},
 		)
 		return this.item

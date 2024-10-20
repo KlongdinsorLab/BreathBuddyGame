@@ -38,8 +38,8 @@ export default class RandomBossCutScene extends Phaser.Scene {
 	}) {
 		this.mcName = mcName
 		this.bgm = bgm
-		this.bossName = 'B1'
-		this.bossId = +this.bossName.substring(this.bossName.length - 1)
+		this.bossId = this.registry.get('boss_id')
+		this.bossName = `B${this.bossId}` as keyof typeof BossByName
 	}
 
 	preload() {

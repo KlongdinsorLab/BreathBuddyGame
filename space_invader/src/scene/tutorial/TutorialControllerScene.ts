@@ -5,6 +5,7 @@ import SoundManager from 'component/sound/SoundManager'
 import WebFont from 'webfontloader'
 import Player from 'component/player/Player'
 import EventEmitter = Phaser.Events.EventEmitter
+import { BossByName } from 'scene/boss/bossInterface'
 
 export type Controller = {
 	player: Player
@@ -131,13 +132,19 @@ export default class TutorialControllerScene extends Phaser.Scene {
 			},
 		})
 
+		const bossName =
+			`B${this.registry.get('boss_id')}` as keyof typeof BossByName
+
 		this.input.once(
 			'pointerdown',
 			() => {
 				this.player.show()
 				isMute ? soundManager.mute() : soundManager.unmute()
 				i18n.removeAllListeners(this)
-				this.scene.start('game', { event: this.event })
+				this.scene.start('game', {
+					event: this.event,
+					bossName: bossName,
+				})
 				this.scene.stop()
 				this.scene.stop('tutorial character')
 				this.scene.stop('tutorial HUD')

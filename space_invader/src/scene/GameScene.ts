@@ -256,20 +256,20 @@ export default class GameScene extends Phaser.Scene {
 			boosterUI.create()
 		})
 
+		this.boosterEffect = {
+			remainingUses: 0,
+			remainingTime: 0,
+			hitMeteorScore: 1,
+			laserFrequency: 1,
+			bulletCount: 1,
+			shootingPhase: 1,
+			destroyMeteorScore: 1,
+			laserFactory: 'single',
+			releasedBullet: 1,
+			bulletMultiply: 1,
+			score: 1,
+		}
 		if (this.reloadCountNumber > 5) {
-			this.boosterEffect = {
-				remainingUses: 0,
-				remainingTime: 0,
-				hitMeteorScore: 1,
-				laserFrequency: 1,
-				bulletCount: 1,
-				shootingPhase: 1,
-				destroyMeteorScore: 1,
-				laserFactory: 'single',
-				releasedBullet: 1,
-				bulletMultiply: 1,
-				score: 1,
-			}
 			boosters.forEach((booster) => {
 				this.boosterByName = booster
 				this.booster = new boosterByName[this.boosterByName]()
@@ -304,7 +304,7 @@ export default class GameScene extends Phaser.Scene {
 			this.scene.scene.registry.set('boosterEffect', this.boosterEffect)
 		}
 		this.laserFactory = new LaserFactoryByName[
-			this.boosterEffect.laserFactory
+			this.boosterEffect?.laserFactory ?? 'single'
 		]()
 
 		const self = this

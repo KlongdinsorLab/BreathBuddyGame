@@ -164,7 +164,7 @@ export default class EndGameScene extends Phaser.Scene {
 				this.finishGameResponse = await apiService.finishGameSession({
 					score: this.score,
 					lap: this.scene.scene.registry.get('lap'),
-					is_booster_received: false,
+					is_booster_received: this.registry.get('isBoosterReceived'),
 				})
 			} catch (error) {
 				console.error(error)
@@ -209,7 +209,10 @@ export default class EndGameScene extends Phaser.Scene {
 		this.heart2 = new Heart(this, width / 2 - 1.5 * MARGIN, 464, 2)
 		this.isHeartEmpty =
 			!this.heart1.getIsRecharged() && !this.heart2.getIsRecharged()
-		this.rewardDialog = new RewardDialog(this)
+
+		if (this.registry.get('isBoosterReceived')) {
+			this.rewardDialog = new RewardDialog(this)
+		}
 
 		this.restartButton = new RestartButton(this)
 		this.homeButton = new HomeButton(this)
@@ -220,7 +223,7 @@ export default class EndGameScene extends Phaser.Scene {
 			this.homeButton.hide()
 			this.restartButton.disable()
 			this.restartButton.hide()
-			this.rewardDialog.hide()
+			this.rewardDialog?.hide()
 			this.completeText.setVisible(false)
 
 			this.heart1.getBody().setVisible(false)
@@ -254,7 +257,7 @@ export default class EndGameScene extends Phaser.Scene {
 			this.homeButton.hide()
 			this.restartButton.disable()
 			this.restartButton.hide()
-			this.rewardDialog.hide()
+			this.rewardDialog?.hide()
 			this.completeText.setVisible(false)
 
 			this.heart1.getBody().setVisible(false)
@@ -277,7 +280,7 @@ export default class EndGameScene extends Phaser.Scene {
 				}
 
 				self.vas?.initFontStyle()
-				self.rewardDialog.initFontStyle()
+				self.rewardDialog?.initFontStyle()
 				self.heart1.initFontStyle()
 				self.heart2.initFontStyle()
 				self.restartButton.initFontStyle()
@@ -383,9 +386,9 @@ export default class EndGameScene extends Phaser.Scene {
 
 		if (this.playerJson.todayPlayed == 10) {
 			this.completeText.setVisible(true)
-			this.rewardDialog.hide()
+			this.rewardDialog?.hide()
 		} else {
-			this.rewardDialog.show()
+			this.rewardDialog?.show()
 		}
 		this.homeButton.show()
 		this.homeButton.activate()

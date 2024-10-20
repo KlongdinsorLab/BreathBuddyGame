@@ -24,6 +24,9 @@ export enum BossTutorialScene {
 
 export enum BossName {
 	B1 = 'B1',
+	B2 = 'B2',
+	B3 = 'B3',
+	B4 = 'B4',
 }
 
 interface Constructable<T> {
