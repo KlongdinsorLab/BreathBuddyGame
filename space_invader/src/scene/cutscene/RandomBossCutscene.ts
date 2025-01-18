@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { Boss } from 'component/enemy/boss/Boss'
 import { BossVersion } from 'component/enemy/boss/BossVersion'
@@ -25,6 +26,7 @@ export default class RandomBossCutScene extends Phaser.Scene {
 	private mcName!: keyof typeof PlayerByName
 	private bgm?: Phaser.Sound.BaseSound
 	private selectedCharacterId!: string
+	private isRestartedGame = false
 
 	constructor() {
 		super('cutscene_randomboss')
@@ -33,15 +35,18 @@ export default class RandomBossCutScene extends Phaser.Scene {
 	init({
 		mcName,
 		bgm,
+		isRestartedGame,
 	}: {
 		mcName: keyof typeof PlayerByName
 		bgm: Phaser.Sound.BaseSound
+		isRestartedGame: boolean
 	}) {
 		this.mcName = mcName
 		this.bgm = bgm
 		this.bossId = this.registry.get('boss_id')
 		this.bossName = `B${this.bossId}` as keyof typeof BossByName
 		this.selectedCharacterId = this.registry.get('selectedCharacterId')
+		this.isRestartedGame = isRestartedGame
 	}
 
 	preload() {
@@ -155,7 +160,10 @@ export default class RandomBossCutScene extends Phaser.Scene {
 		}
 
 		setTimeout(() => {
-			this.scene.start('game', { bossName: this.bossName })
+			this.scene.start('game', {
+				bossName: this.bossName,
+				isRestartedGame: this.isRestartedGame,
+			})
 			new SoundManager(this).stop(this.bgm!)
 		}, 3000)
 	}

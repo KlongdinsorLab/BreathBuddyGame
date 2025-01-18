@@ -193,7 +193,8 @@ export default class BossScene extends Phaser.Scene {
 
 		this.isCompleteInit = true
 
-		const holdDurationMs = (this.scene.scene.registry.get('difficulty').inhale_second ?? 1) * 1000 
+		const holdDurationMs =
+			(this.scene.scene.registry.get('difficulty').inhale_second ?? 1) * 1000
 
 		this.gaugeRegistry = new InhaleGaugeRegistry(this, holdDurationMs)
 		this.gaugeRegistry.createbyDivision(1)
@@ -212,9 +213,7 @@ export default class BossScene extends Phaser.Scene {
 			boosterUI.create()
 		})
 
-		this.boosterEffect = this.scene.scene.registry.get('boosterEffect')
-
-		this.boosterEffect = {
+		this.boosterEffect = this.scene.scene.registry.get('boosterEffect') ?? {
 			remainingUses: 0,
 			remainingTime: 0,
 			hitMeteorScore: 1,
