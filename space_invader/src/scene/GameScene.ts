@@ -80,6 +80,8 @@ export default class GameScene extends Phaser.Scene {
 
 	private holdDurationMs!: number
 
+	private isRestartedGame = false
+
 	constructor() {
 		super({ key: 'game' })
 		this.soundManager = new SoundManager(this)
@@ -151,11 +153,13 @@ export default class GameScene extends Phaser.Scene {
 		reloadCount,
 		isCompleteBoss,
 		bossName,
+		isRestartedGame,
 	}: {
 		score: number
 		reloadCount: number
 		isCompleteBoss: boolean
 		bossName: keyof typeof BossByName
+		isRestartedGame: boolean
 	}) {
 		this.selectedCharacterId = this.registry.get('selectedCharacterId')
 		this.scoreNumber = score ?? 0
@@ -164,6 +168,7 @@ export default class GameScene extends Phaser.Scene {
 		this.bossName = bossName
 		this.bossId = +bossName.substring(bossName.length - 1)
 		this.soundManager.unmute()
+		this.isRestartedGame = isRestartedGame
 	}
 
 	create() {
@@ -218,7 +223,8 @@ export default class GameScene extends Phaser.Scene {
 
 		this.player.addChargeParticle()
 
-		this.holdDurationMs = (this.scene.scene.registry.get('difficulty').inhale_second ?? 1) * 1000 
+		this.holdDurationMs =
+			(this.scene.scene.registry.get('difficulty').inhale_second ?? 1) * 1000
 
 		this.gaugeRegistry = new InhaleGaugeRegistry(this, this.holdDurationMs)
 		this.gaugeRegistry.createbyDivision(1)
@@ -230,8 +236,6 @@ export default class GameScene extends Phaser.Scene {
 		this.score = new Score(this)
 		this.score.setScore(this.scoreNumber)
 		// this.timerText = this.add.text(width - MARGIN, MARGIN, `time: ${Math.floor(GAME_TIME_LIMIT_MS / 1000)}`, {fontSize: '42px'}).setOrigin(1, 0)
-
-		
 
 		this.meteorFactory = new MeteorFactory()
 
@@ -260,10 +264,12 @@ export default class GameScene extends Phaser.Scene {
 
 		//todo: if have more than one booster, refactor this
 		//set ui for booster
-		boosters.forEach((booster) => {
-			const boosterUI = new BoosterUI(this, booster, { x: 594, y: 1142 })
-			boosterUI.create()
-		})
+		if (!this.isRestartedGame) {
+			boosters.forEach((booster) => {
+				const boosterUI = new BoosterUI(this, booster, { x: 594, y: 1142 })
+				boosterUI.create()
+			})
+		}
 
 		this.boosterEffect = {
 			remainingUses: 0,
@@ -278,7 +284,7 @@ export default class GameScene extends Phaser.Scene {
 			bulletMultiply: 1,
 			score: 1,
 		}
-		if (this.reloadCountNumber > 5) {
+		if (boosters.length > 0 && !this.isRestartedGame) {
 			boosters.forEach((booster) => {
 				this.boosterByName = booster
 				this.booster = new boosterByName[this.boosterByName]()
@@ -310,8 +316,8 @@ export default class GameScene extends Phaser.Scene {
 					score: this.boosterEffect.score + boosterEffect.score,
 				}
 			})
-			this.scene.scene.registry.set('boosterEffect', this.boosterEffect)
 		}
+		this.scene.scene.registry.set('boosterEffect', this.boosterEffect)
 		this.laserFactory = new LaserFactoryByName[
 			this.boosterEffect?.laserFactory ?? 'single'
 		]()

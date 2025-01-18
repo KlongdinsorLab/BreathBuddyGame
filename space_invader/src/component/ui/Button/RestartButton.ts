@@ -33,8 +33,8 @@ export default class RestartButton extends Button {
 			scene.scene.stop()
 			i18n.destroyEmitter()
 			// this.timeService.saveLastPlayTime()
-
-			scene.scene.start('cutscene_randomboss')
+			scene.registry.set('boosterEffect', null)
+			scene.scene.start('cutscene_randomboss', { isRestartedGame: true })
 		})
 
 		this.buttonText = i18n
