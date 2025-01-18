@@ -331,7 +331,7 @@ export default class MyBagScene extends Phaser.Scene {
 
 		this.setBoosterButtonDisabled(false)
 		this.setRewardButtonDisabled(true)
-		
+
 		this.redButtonLeft.setInteractive().on('pointerup', () => {
 			this.leftArrowInteraction()
 			this.setArrowOverlay()
