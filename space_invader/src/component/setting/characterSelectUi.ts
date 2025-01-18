@@ -44,8 +44,10 @@ export default class characterSelectUi {
 	}
 
 	private async handleCharacterData() {
-		const playerCharactersId: number[] =
-			this.scene?.registry.get('playerCharactersId')
+		const apiService = new supabaseAPIService()
+		const playerCharactersId: number[] = (
+			await apiService.getUnlockedCharacter()
+		).response.map((each) => each.character_id)
 		const selectedCharacterId = this.scene?.registry.get('selectedCharacterId')
 
 		const allCharacter = ALL_CHARACTER
