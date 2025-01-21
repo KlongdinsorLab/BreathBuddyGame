@@ -57,6 +57,11 @@ export default class RestartButton extends Button {
 			.setOrigin(1, 0.5)
 	}
 
+	resetRegistry(scene: Phaser.Scene) {
+		scene.registry.set('boosterEffect', null)
+		scene.registry.set('isBoosterReceived', false)
+	}
+
 	initFontStyle() {
 		this.buttonText
 			.setStyle({
