@@ -274,6 +274,9 @@ export default class EndGameScene extends Phaser.Scene {
 		}
 
 		const self = this
+
+		this.resetRegistry()
+
 		WebFont.load({
 			google: {
 				families: ['Mali', 'Jua'],
@@ -427,5 +430,12 @@ export default class EndGameScene extends Phaser.Scene {
 		})
 		this.sortDate(playTodayDate)
 		return playTodayDate
+	}
+
+	resetRegistry() {
+		this.registry.set('isBoosterReceived', false)
+		this.registry.set('boosterEffect', null)
+		this.registry.set('score', 0)
+		this.registry.set('lap', 0)
 	}
 }
