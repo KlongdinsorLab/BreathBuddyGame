@@ -7,6 +7,7 @@ import {
 	BOSS_HIT_DELAY_MS,
 	BOSS_TUTORIAL_DELAY_MS,
 	BOSS_MULTIPLE_COUNT,
+	BOSS_HIT_SCORE,
 } from 'config'
 // import SoundManager from 'component/sound/SoundManager'
 import { Boss } from '../Boss'
@@ -123,7 +124,7 @@ export class B3Boss extends Boss {
 		}, BOSS_HIT_DELAY_MS)
 
 		this.score.add(
-			DESTROY_METEOR_SCORE * this.boosterEffect?.destroyMeteorScore,
+			BOSS_HIT_SCORE * this.boosterEffect?.destroyMeteorScore,
 		)
 	}
 
