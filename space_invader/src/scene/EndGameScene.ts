@@ -36,8 +36,6 @@ export default class EndGameScene extends Phaser.Scene {
 	private levelUpPopup!: LevelUpPopup
 	private finishGameResponse!: FinishGameResponse
 
-	private playerJson = { totalPlayed: 15, todayPlayed: 5 }
-
 	private isLoading!: boolean
 
 	constructor() {
@@ -229,7 +227,7 @@ export default class EndGameScene extends Phaser.Scene {
 		this.homeButton = new HomeButton(this)
 		this.vas = new vas(this)
 
-		if (this.playerJson.totalPlayed % VAS_COUNT == 0) {
+		if (this.finishGameResponse.total_games % VAS_COUNT == 0) {
 			this.homeButton.disable()
 			this.homeButton.hide()
 			this.restartButton.disable()
@@ -370,7 +368,7 @@ export default class EndGameScene extends Phaser.Scene {
 			return
 		}
 
-		if (this.playerJson.totalPlayed % VAS_COUNT != 0) {
+		if (this.finishGameResponse.total_games % VAS_COUNT != 0) {
 			this.showUI()
 		}
 	}
@@ -378,7 +376,10 @@ export default class EndGameScene extends Phaser.Scene {
 	showUI(): void {
 		this.isHeartEmpty =
 			!this.heart1.getIsRecharged() && !this.heart2.getIsRecharged()
-		if (!this.isHeartEmpty && this.playerJson.todayPlayed < MAX_PLAYED) {
+		if (
+			!this.isHeartEmpty &&
+			this.finishGameResponse.games_played_today.length < MAX_PLAYED
+		) {
 			if (this.vas && this.vas.getScore() >= 7) {
 				this.restartButton.hide()
 				return
@@ -390,7 +391,7 @@ export default class EndGameScene extends Phaser.Scene {
 			this.restartButton.hide()
 		}
 
-		if (this.playerJson.todayPlayed == 10) {
+		if (this.finishGameResponse.games_played_today.length >= 10) {
 			this.completeText.setVisible(true)
 			this.rewardDialog?.hide()
 		} else {
