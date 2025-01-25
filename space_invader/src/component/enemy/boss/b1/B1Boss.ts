@@ -107,7 +107,7 @@ export class B1Boss extends Boss {
 	}
 
 	hit(): void {
-		if (isHit) return
+		if (isHit || this.bossSkill.getIsActive()) return
 
 		// TODO fixes me
 		// const randomSoundIndex = Math.floor(Math.random() * 4)
