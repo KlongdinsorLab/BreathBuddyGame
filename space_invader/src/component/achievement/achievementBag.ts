@@ -398,7 +398,7 @@ export default class AchievementBag {
 			})
 			logger.info(
 				this.scene.scene.key,
-				`Api call success, Response: ${data.response}`,
+				`Api call success, Response: ${JSON.stringify(data.response)}`,
 			)
 
 			this.rewardPopup = new RewardPopup(this.scene, characterId)

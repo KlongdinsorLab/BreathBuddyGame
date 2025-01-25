@@ -105,7 +105,10 @@ export default class difficultySelectUi {
 		const apiService = new supabaseAPIService()
 		try {
 			const data = await apiService.updateCurrentDifficulty(difficulty)
-			logger.info(this.scene.scene.key, `Api call success, Response: ${data}`)
+			logger.info(
+				this.scene.scene.key,
+				`Api call success, Response: ${JSON.stringify(data)}`,
+			)
 		} catch (error) {
 			logger.error(this.scene.scene.key, `Api call failed: ${error}`)
 		}

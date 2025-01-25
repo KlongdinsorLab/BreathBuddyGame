@@ -210,13 +210,13 @@ export default class PauseScene extends Phaser.Scene {
 				})
 				logger.info(
 					this.scene.key,
-					`Api call success, Response: ${updateGameResponse}`,
+					`Api call success, Response: ${JSON.stringify(updateGameResponse)}`,
 				)
 
 				const endGameResponse = await apiService.endGameSession()
 				logger.info(
 					this.scene.key,
-					`Api call success, Response: ${endGameResponse}`,
+					`Api call success, Response: ${JSON.stringify(endGameResponse)}`,
 				)
 				this.stopAllScenes()
 				this.scene.stop()
@@ -337,13 +337,13 @@ export default class PauseScene extends Phaser.Scene {
 				})
 				logger.info(
 					this.scene.key,
-					`Api call success, Response: ${data.response}`,
+					`Api call success, Response: ${JSON.stringify(data.response)}`,
 				)
 
 				const endGameResponse = await apiService.endGameSession()
 				logger.info(
 					this.scene.key,
-					`Api call success, Response: ${endGameResponse}`,
+					`Api call success, Response: ${JSON.stringify(endGameResponse)}`,
 				)
 
 				this.stopAllScenes()

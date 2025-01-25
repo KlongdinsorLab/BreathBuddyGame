@@ -82,7 +82,10 @@ export default class characterSelectUi {
 		this.useChar()
 		try {
 			const data = await apiService.updateSelectedCharacter(this.usingCharIndex)
-			logger.info(this.scene!.scene.key, `Api call success, Response: ${data}`)
+			logger.info(
+				this.scene!.scene.key,
+				`Api call success, Response: ${JSON.stringify(data)}`,
+			)
 		} catch (error) {
 			logger.error(this.scene!.scene.key, `Api call failed: ${error}`)
 		}

@@ -247,7 +247,7 @@ export default class MyBagScene extends Phaser.Scene {
 			const data = await apiService.getUnlockedAchievement()
 			logger.verbose(
 				this.scene.key,
-				`Api call success, Unlocked achievement: ${data.response}`,
+				`Api call success, Unlocked achievement: ${JSON.stringify(data.response)}`,
 			)
 			const unlockedAchievement = data.response
 
