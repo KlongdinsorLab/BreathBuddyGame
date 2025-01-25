@@ -121,7 +121,12 @@ export class Meteor extends Enemy {
 		this.enemy.destroy()
 		// this.soundManager.play(this.enermyDestroyedSound!, true)
 		this.soundEffect.play('rock-destroy')
-		this.score.add(DESTROY_METEOR_SCORE * this.boosterEffect.destroyMeteorScore)
+		this.score.add(
+			DESTROY_METEOR_SCORE *
+				(this.boosterEffect?.destroyMeteorScore
+					? this.boosterEffect?.destroyMeteorScore
+					: 1),
+		)
 	}
 
 	getBody(): Phaser.Types.Physics.Arcade.ImageWithDynamicBody {
