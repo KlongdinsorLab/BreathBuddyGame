@@ -209,7 +209,7 @@ export default class OtpScene extends Phaser.Scene {
 			const supabaseResponse = await this.apiService.login(this.phoneNumber)
 			logger.info(
 				this.scene.key,
-				`Api call success, Response: ${supabaseResponse}`,
+				`Api call success, Response: ${JSON.stringify(supabaseResponse)}`,
 			)
 
 			if (supabaseResponse.message === 'Ok') {

@@ -218,7 +218,7 @@ export default class ConfirmScene extends Phaser.Scene {
 					}
 					logger.info(
 						this.scene.key,
-						`Api call success, Response: ${data.response}`,
+						`Api call success, Response: ${JSON.stringify(data.response)}`,
 					)
 					this.scene.stop()
 					this.scene.launch('home', { bgm: this.bgm })

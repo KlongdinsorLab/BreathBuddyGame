@@ -50,7 +50,7 @@ export default class DisplayNameScene extends Phaser.Scene {
 					const data = await apiService.updateUsername(username)
 					logger.info(
 						this.scene.key,
-						`Api call success, Response: ${data.response}`,
+						`Api call success, Response: ${JSON.stringify(data.response)}`,
 					)
 					this.scene.start('redeem')
 					this.registry.set('username', username)
@@ -58,7 +58,6 @@ export default class DisplayNameScene extends Phaser.Scene {
 				} catch (error) {
 					logger.error(this.scene.key, `Api call failed: ${error}`)
 				}
-				
 			}
 		}
 	}

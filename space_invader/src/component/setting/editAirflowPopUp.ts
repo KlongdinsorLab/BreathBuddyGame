@@ -364,7 +364,10 @@ export default class editAirflowPopUp {
 		const apiService = new supabaseAPIService()
 		try {
 			const data = await apiService.updateAirflow(airflow as Airflow)
-			logger.info(this.scene!.scene.key, `Api call success, Response: ${data}`)
+			logger.info(
+				this.scene!.scene.key,
+				`Api call success, Response: ${JSON.stringify(data)}`,
+			)
 		} catch (error) {
 			logger.error(
 				this.scene?.scene.key ?? 'EditAirFlow',

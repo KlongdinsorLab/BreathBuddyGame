@@ -126,7 +126,10 @@ export default class editUsernamePopUp {
 		const apiService = new supabaseAPIService()
 		try {
 			const data = await apiService.updateUsername(username)
-			logger.info(this.scene.scene.key, `Api call success, Response: ${data}`)
+			logger.info(
+				this.scene.scene.key,
+				`Api call success, Response: ${JSON.stringify(data)}`,
+			)
 		} catch (error) {
 			logger.error(this.scene.scene.key, `Api call failed: ${error}`)
 		}

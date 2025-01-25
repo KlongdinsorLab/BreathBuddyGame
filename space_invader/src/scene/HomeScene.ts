@@ -50,7 +50,7 @@ export default class HomeScene extends Phaser.Scene {
 			const data = response.response
 			logger.verbose(
 				this.scene.key,
-				`Api call success, Current player data: ${data}`,
+				`Api call success, Current player data: ${JSON.stringify(data)}`,
 			)
 
 			const playToday = this.handlePlayToday(data.play_today)

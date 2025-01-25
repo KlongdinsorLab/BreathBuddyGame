@@ -209,7 +209,7 @@ export default class RedeemScene extends Phaser.Scene {
 						.response
 					logger.info(
 						this.scene.key,
-						`Api call success, Response: ${gameSession}`,
+						`Api call success, Response: ${JSON.stringify(gameSession)}`,
 					)
 					this.scene.scene.registry.set(
 						'booster_drop_id',
