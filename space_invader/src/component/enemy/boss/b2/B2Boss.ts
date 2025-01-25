@@ -2,10 +2,10 @@ import Player from 'component/player/Player'
 import Score from 'component/ui/Score'
 
 import {
-	DESTROY_METEOR_SCORE,
 	BOSS_HIT_DELAY_MS,
 	BOSS_TUTORIAL_DELAY_MS,
 	BOSS_MULTIPLE_COUNT,
+	BOSS_HIT_SCORE,
 } from 'config'
 // import SoundManager from 'component/sound/SoundManager'
 import { Boss } from '../Boss'
@@ -126,7 +126,7 @@ export class B2Boss extends Boss {
 			this.enemy.play('boss-move')
 		}, BOSS_HIT_DELAY_MS)
 		// this.soundManager.play(this.enermyDestroyedSound!, true)
-		this.score.add(DESTROY_METEOR_SCORE * this.boosterEffect.destroyMeteorScore)
+		this.score.add(BOSS_HIT_SCORE * this.boosterEffect.destroyMeteorScore)
 	}
 
 	destroy() {
