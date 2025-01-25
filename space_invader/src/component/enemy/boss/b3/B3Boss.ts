@@ -3,7 +3,6 @@ import Player from 'component/player/Player'
 import Score from 'component/ui/Score'
 
 import {
-	DESTROY_METEOR_SCORE,
 	BOSS_HIT_DELAY_MS,
 	BOSS_TUTORIAL_DELAY_MS,
 	BOSS_MULTIPLE_COUNT,
