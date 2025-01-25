@@ -171,7 +171,7 @@ export default class EndGameScene extends Phaser.Scene {
 
 				logger.info(
 					this.scene.key,
-					`Api call success, Response: ${this.finishGameResponse}`,
+					`Api call success, Response: ${JSON.stringify(this.finishGameResponse)}`,
 				)
 			} catch (error) {
 				logger.error(this.scene.key, `Api call failed: ${error}`)
