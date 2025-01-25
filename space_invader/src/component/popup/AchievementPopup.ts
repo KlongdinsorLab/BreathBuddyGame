@@ -2,8 +2,8 @@ import I18nSingleton from 'i18n/I18nSingleton'
 import { Popup } from './Popup'
 export class AchievementPopup extends Popup {
 	private achievementIdList: number[]
-	private achievementIndex: number = 0
-	private isCompleteAchievement: boolean = false
+	private achievementIndex = 0
+	private isCompleteAchievement = false
 
 	private layer!: Phaser.GameObjects.Layer
 	private screenOverlay!: Phaser.GameObjects.Rectangle
@@ -80,13 +80,12 @@ export class AchievementPopup extends Popup {
 			.setOrigin(0.5, 0)
 		this.layer.add(this.banner)
 
+		const achievementId = this.achievementIdList[this.achievementIndex]
+		const title = `achievement_title_${achievementId}`
+		const text = `achievement_description_${achievementId}`
+
 		this.bannerText = i18n
-			.createTranslatedText(
-				this.scene,
-				this.scene.scale.width / 2,
-				675,
-				'achievement_name_' + this.achievementIdList[this.achievementIndex],
-			)
+			.createTranslatedText(this.scene, this.scene.scale.width / 2, 675, title)
 			.setFontSize(28)
 			.setColor('#FFFFFF')
 			.setStroke('#327F76', 12)
@@ -94,12 +93,7 @@ export class AchievementPopup extends Popup {
 		this.layer.add(this.bannerText)
 
 		this.detailText = i18n
-			.createTranslatedText(
-				this.scene,
-				this.scene.scale.width / 2,
-				817,
-				'achievement_popup_detail',
-			)
+			.createTranslatedText(this.scene, this.scene.scale.width / 2, 817, text)
 			.setFontSize(32)
 			.setColor('#FFFFFF')
 			.setStroke('#3F088C', 6)
