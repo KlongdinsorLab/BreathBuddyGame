@@ -1,6 +1,8 @@
 import I18nSingleton from 'i18n/I18nSingleton'
 import { Button } from './Button'
 import { MARGIN } from 'config'
+import { logger } from 'services/logger'
+import supabaseAPIService from 'services/API/backend/supabaseAPIService'
 // import TimeService from 'services/timeService'
 
 export default class RestartButton extends Button {
@@ -11,9 +13,7 @@ export default class RestartButton extends Button {
 		super(scene)
 		const { width } = scene.scale
 		const i18n = I18nSingleton.getInstance()
-		// this.timeService = new TimeService()
-		// TODO: get playCount from backend
-		// this.playCount = Number(localStorage.getItem('playCount')) ?? 0
+		const apiService = new supabaseAPIService()
 
 		this.button = this.scene.add
 			.nineslice(
@@ -29,10 +29,18 @@ export default class RestartButton extends Button {
 			.setOrigin(0.5, 0)
 
 		this.button.setInteractive()
-		this.button.on('pointerup', () => {
+		this.button.on('pointerup', async () => {
 			scene.scene.stop()
 			i18n.destroyEmitter()
 			// this.timeService.saveLastPlayTime()
+			const gameSession = (await apiService.startGameSession(0)).response
+
+			logger.info(
+				this.scene.scene.key,
+				`Api call success, Response: ${JSON.stringify(gameSession)}`,
+			)
+			scene.registry.set('booster_drop_id', gameSession.booster_drop_id)
+			scene.registry.set('boss_id', gameSession.boss_id)
 			scene.registry.set('boosterEffect', null)
 			scene.scene.start('cutscene_randomboss', { isRestartedGame: true })
 		})
