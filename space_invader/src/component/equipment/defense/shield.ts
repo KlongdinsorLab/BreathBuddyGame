@@ -50,8 +50,12 @@ export default class Shield extends Equipment {
 
 	depleteShield(): void {
 		this.shieldCountDown.setText(
-			(this.boosterEffect.remainingUses + 1).toString(),
+			(this.boosterEffect.remainingUses).toString(),
 		)
+
+		if(this.boosterEffect.remainingUses === 0) {
+			this.deactivate()
+		}
 	}
 
 	activate(): void {
@@ -60,7 +64,7 @@ export default class Shield extends Equipment {
 
 		this.shieldCountDown.setText(
 			(
-				this.boosterEffect.remainingTime || this.boosterEffect.remainingUses + 1
+				this.boosterEffect.remainingTime || this.boosterEffect.remainingUses
 			).toString(),
 		)
 		this.shieldCountDown.setVisible(true)

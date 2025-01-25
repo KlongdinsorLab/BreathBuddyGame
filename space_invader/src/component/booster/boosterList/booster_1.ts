@@ -4,7 +4,7 @@ export class Booster1 extends Booster {
 	private remainingUses: number
 	constructor() {
 		super(BoosterName.BOOSTER_1)
-		this.remainingUses = 4
+		this.remainingUses = 5
 	}
 	getBoosterEffect(): BoosterEffect {
 		return {

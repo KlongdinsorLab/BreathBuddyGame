@@ -88,7 +88,7 @@ export default class B4DoubleCrescent {
 				}
 				
 				if (
-					this.boosterEffect?.remainingUses === 0 &&
+					this.boosterEffect?.remainingUses === 1 &&
 					this.boosterEffect.remainingTime === 0 &&
 					this.player.getIsUsedShield()
 				) {
@@ -172,7 +172,7 @@ export default class B4DoubleCrescent {
 				}
 				
 				if (
-					this.boosterEffect?.remainingUses === 0 &&
+					this.boosterEffect?.remainingUses === 1 &&
 					this.boosterEffect.remainingTime === 0 &&
 					this.player.getIsUsedShield()
 				) {
