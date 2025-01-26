@@ -42,6 +42,7 @@ export default class RestartButton extends Button {
 			scene.registry.set('booster_drop_id', gameSession.booster_drop_id)
 			scene.registry.set('boss_id', gameSession.boss_id)
 			scene.registry.set('boosterEffect', null)
+			scene.registry.set('isRestartedGame', true)
 			scene.scene.start('cutscene_randomboss', { isRestartedGame: true })
 		})
 

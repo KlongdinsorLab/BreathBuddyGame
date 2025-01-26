@@ -272,18 +272,20 @@ export default class GameScene extends Phaser.Scene {
 			})
 		}
 
-		this.boosterEffect = {
-			remainingUses: 0,
-			remainingTime: 0,
-			hitMeteorScore: 1,
-			laserFrequency: 1,
-			bulletCount: 1,
-			shootingPhase: 1,
-			destroyMeteorScore: 1,
-			laserFactory: 'single',
-			releasedBullet: 1,
-			bulletMultiply: 1,
-			score: 1,
+		if (this.scene.scene.registry.get('lap') == 0) {
+			this.boosterEffect = {
+				remainingUses: 0,
+				remainingTime: 0,
+				hitMeteorScore: 1,
+				laserFrequency: 1,
+				bulletCount: 1,
+				shootingPhase: 1,
+				destroyMeteorScore: 1,
+				laserFactory: 'single',
+				releasedBullet: 1,
+				bulletMultiply: 1,
+				score: 1,
+			}
 		}
 		if (boosters.length > 0 && !this.isRestartedGame && !this.isCompleteBoss) {
 			boosters.forEach((booster) => {
@@ -436,7 +438,10 @@ export default class GameScene extends Phaser.Scene {
 
 		if (this.reloadCount.isDepleted()) {
 			gauge.deplete()
-			this.scene.launch('end game', { score: this.score.getScore(), isTimeout: false })
+			this.scene.launch('end game', {
+				score: this.score.getScore(),
+				isTimeout: false,
+			})
 			this.scene.pause()
 		}
 
@@ -456,6 +461,7 @@ export default class GameScene extends Phaser.Scene {
 					score: this.score.getScore(),
 					playerX: this.player.getBody().x,
 					reloadCount: this.reloadCount.getCount(),
+					isRestartedGame: this.isRestartedGame,
 				})
 			}
 		} else if (
@@ -530,7 +536,10 @@ export default class GameScene extends Phaser.Scene {
 						this.boosterEffect.shootingPhase,
 					callback: () => {
 						this.scene.pause()
-						this.scene.launch('end game', { score: this.score.getScore(), isTimeout: false })
+						this.scene.launch('end game', {
+							score: this.score.getScore(),
+							isTimeout: false,
+						})
 					},
 					loop: false,
 				})
@@ -548,15 +557,18 @@ export default class GameScene extends Phaser.Scene {
 	}
 
 	setGameTimeout() {
-		const gameCount = this.registry.get("gamesPlayedThisSession")
+		const gameCount = this.registry.get('gamesPlayedThisSession')
 		setTimeout(() => {
-			if(gameCount === this.registry.get("gamesPlayedThisSession") &&
+			if (
+				gameCount === this.registry.get('gamesPlayedThisSession') &&
 				this.registry.get('gameState') === GameState.IN_GAME
 			) {
 				this.scene.stop()
-				this.scene.launch('end game', { score: this.score.getScore(), isTimeout: true })
+				this.scene.launch('end game', {
+					score: this.score.getScore(),
+					isTimeout: true,
+				})
 			}
-
 		}, GAME_TIME_LIMIT_MS)
 	}
 }
