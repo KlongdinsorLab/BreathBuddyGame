@@ -226,7 +226,6 @@ export default class vas {
 		const text = this.scene.add
 			.text(x + 32, y + 32, index.toString())
 			.setOrigin(0.5, 0.5)
-			.setDepth(2)
 			.setInteractive()
 			.on('pointerup', () => {
 				if (this.score !== index) {
