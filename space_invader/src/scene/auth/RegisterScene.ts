@@ -35,8 +35,6 @@ export default class RegisterScene extends Phaser.Scene {
 		this.isEdit = data.edit
 		this.phoneNumber = data.phoneNumber
 		this.bgm = data.bgm
-		logger.debug(this.scene.key, `register init: ${JSON.stringify(data)}`)
-		logger.debug(this.scene.key, `register isEdit: ${this.isEdit}`)
 	}
 
 	constructor() {

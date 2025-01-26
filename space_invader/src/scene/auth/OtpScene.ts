@@ -220,18 +220,20 @@ export default class OtpScene extends Phaser.Scene {
 			}
 		} catch (e: any) {
 			logger.error(this.scene.key, `Authentication Error`)
-			if (e.statusCode == 404)
+			if (e.statusCode == 404) {
 				this.scene.launch('register', {
 					phoneNumber: this.phoneNumber,
 					bgm: this.bgm,
 				})
-
-			const toast = <Element>this.element.getChildByID('toast')
-			toast.innerHTML +=
-				'<div class="bg-red-500 rounded-lg p-4 w-[680px] h-[75px] flex justify-center"><span class="text-3xl">เกิดข้อผิดพลาด</span></div>'
-			setTimeout(() => {
-				toast.innerHTML = ''
-			}, 5000)
+				return
+			} else {
+				const toast = <Element>this.element.getChildByID('toast')
+				toast.innerHTML +=
+					'<div class="bg-red-500 rounded-lg p-4 w-[680px] h-[75px] flex justify-center"><span class="text-3xl">เกิดข้อผิดพลาด</span></div>'
+				setTimeout(() => {
+					toast.innerHTML = ''
+				}, 5000)
+			}
 		}
 	}
 
