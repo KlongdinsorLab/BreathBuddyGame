@@ -318,11 +318,11 @@ export default class GameScene extends Phaser.Scene {
 				}
 			})
 		}
-		this.scene.scene.registry.set('boosterEffect', this.boosterEffect)
-
 		if (this.isCompleteBoss) {
 			this.boosterEffect = this.registry.get('boosterEffect')
 		}
+		
+		this.scene.scene.registry.set('boosterEffect', this.boosterEffect)
 
 		this.laserFactory = new LaserFactoryByName[
 			this.boosterEffect?.laserFactory ?? 'single'
