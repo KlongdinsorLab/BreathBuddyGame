@@ -107,7 +107,7 @@ export class B1Boss extends Boss {
 	}
 
 	hit(): void {
-		if (isHit) return
+		if (isHit || this.bossSkill.getIsActive()) return
 
 		// TODO fixes me
 		// const randomSoundIndex = Math.floor(Math.random() * 4)
@@ -128,7 +128,12 @@ export class B1Boss extends Boss {
 			this.enemy.play('boss-move')
 		}, BOSS_HIT_DELAY_MS)
 		// this.soundManager.play(this.enermyDestroyedSound!, true)
-		this.score.add(BOSS_HIT_SCORE * this.boosterEffect.destroyMeteorScore)
+		this.score.add(
+			BOSS_HIT_SCORE *
+				(this.boosterEffect?.destroyMeteorScore
+					? this.boosterEffect?.destroyMeteorScore
+					: 1),
+		)
 	}
 
 	destroy() {

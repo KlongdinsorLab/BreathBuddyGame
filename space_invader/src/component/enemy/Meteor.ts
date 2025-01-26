@@ -65,7 +65,12 @@ export class Meteor extends Enemy {
 				if (this.player.getIsHit()) return
 				this.player.setIsHit(true)
 				this.player.damaged()
-				this.score.add(HIT_METEOR_SCORE * this.boosterEffect.hitMeteorScore)
+				this.score.add(
+					HIT_METEOR_SCORE *
+						(this.boosterEffect?.hitMeteorScore
+							? this.boosterEffect?.hitMeteorScore
+							: 1),
+				)
 				this.scene.time.delayedCall(PLAYER_HIT_DELAY_MS, () => {
 					this.player.setIsHit(false)
 					this.player.recovered()
@@ -121,7 +126,12 @@ export class Meteor extends Enemy {
 		this.enemy.destroy()
 		// this.soundManager.play(this.enermyDestroyedSound!, true)
 		this.soundEffect.play('rock-destroy')
-		this.score.add(DESTROY_METEOR_SCORE * this.boosterEffect.destroyMeteorScore)
+		this.score.add(
+			DESTROY_METEOR_SCORE *
+				(this.boosterEffect?.destroyMeteorScore
+					? this.boosterEffect?.destroyMeteorScore
+					: 1),
+		)
 	}
 
 	getBody(): Phaser.Types.Physics.Arcade.ImageWithDynamicBody {

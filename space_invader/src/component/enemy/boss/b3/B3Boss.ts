@@ -123,7 +123,10 @@ export class B3Boss extends Boss {
 		}, BOSS_HIT_DELAY_MS)
 
 		this.score.add(
-			BOSS_HIT_SCORE * this.boosterEffect?.destroyMeteorScore,
+			BOSS_HIT_SCORE *
+				(this.boosterEffect?.destroyMeteorScore
+					? this.boosterEffect?.destroyMeteorScore
+					: 1),
 		)
 	}
 

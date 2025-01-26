@@ -285,7 +285,7 @@ export default class GameScene extends Phaser.Scene {
 			bulletMultiply: 1,
 			score: 1,
 		}
-		if (boosters.length > 0 && !this.isRestartedGame) {
+		if (boosters.length > 0 && !this.isRestartedGame && !this.isCompleteBoss) {
 			boosters.forEach((booster) => {
 				this.boosterByName = booster
 				this.booster = new boosterByName[this.boosterByName]()
@@ -304,7 +304,7 @@ export default class GameScene extends Phaser.Scene {
 					shootingPhase:
 						this.boosterEffect.shootingPhase + boosterEffect.shootingPhase,
 					destroyMeteorScore:
-						this.boosterEffect.destroyMeteorScore +
+						this.boosterEffect?.destroyMeteorScore +
 						boosterEffect.destroyMeteorScore,
 					laserFactory:
 						this.boosterEffect.laserFactory === 'triple'
@@ -319,6 +319,11 @@ export default class GameScene extends Phaser.Scene {
 			})
 		}
 		this.scene.scene.registry.set('boosterEffect', this.boosterEffect)
+
+		if (this.isCompleteBoss) {
+			this.boosterEffect = this.registry.get('boosterEffect')
+		}
+
 		this.laserFactory = new LaserFactoryByName[
 			this.boosterEffect?.laserFactory ?? 'single'
 		]()

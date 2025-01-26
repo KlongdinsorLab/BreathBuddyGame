@@ -126,7 +126,12 @@ export class B2Boss extends Boss {
 			this.enemy.play('boss-move')
 		}, BOSS_HIT_DELAY_MS)
 		// this.soundManager.play(this.enermyDestroyedSound!, true)
-		this.score.add(BOSS_HIT_SCORE * this.boosterEffect.destroyMeteorScore)
+		this.score.add(
+			BOSS_HIT_SCORE *
+				(this.boosterEffect?.destroyMeteorScore
+					? this.boosterEffect?.destroyMeteorScore
+					: 1),
+		)
 	}
 
 	destroy() {
