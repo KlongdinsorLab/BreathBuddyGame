@@ -34,6 +34,7 @@ import { LaserFactoryByName } from 'component/equipment/weapon/LaserFactoryByNam
 import { LaserFactory } from 'component/equipment/weapon/LaserFactory'
 import supabaseAPIService from 'services/API/backend/supabaseAPIService'
 import { logger } from 'services/logger'
+import { GameState } from 'component/GameState'
 
 export default class GameScene extends Phaser.Scene {
 	private background!: Phaser.GameObjects.TileSprite
@@ -542,8 +543,14 @@ export default class GameScene extends Phaser.Scene {
 	}
 
 	setGameTimeout() {
+		const gameCount = this.registry.get("gamesPlayedThisSession")
 		setTimeout(() => {
-			this.scene.launch('end game', { score: this.score.getScore() })
+			if(gameCount === this.registry.get("gamesPlayedThisSession") &&
+				this.registry.get('gameState') === GameState.IN_GAME
+			) {
+				this.scene.launch('end game', { score: this.score.getScore() })
+			}
+
 		}, GAME_TIME_LIMIT_MS)
 	}
 }

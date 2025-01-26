@@ -15,6 +15,7 @@ import { LevelUpPopup } from 'component/popup/LevelUpPopup'
 import supabaseAPIService from 'services/API/backend/supabaseAPIService'
 import { FinishGameResponse } from 'services/API/definition/responseDTO'
 import { logger } from 'services/logger'
+import { GameState } from 'component/GameState'
 
 export default class EndGameScene extends Phaser.Scene {
 	private score!: number
@@ -158,6 +159,8 @@ export default class EndGameScene extends Phaser.Scene {
 		if (this.boosterEffect && this.boosterEffect.score) {
 			this.score = this.score * this.boosterEffect.score
 		}
+
+		this.registry.set('gameState', GameState.MENU)
 
 		const finishGame = async () => {
 			try {
