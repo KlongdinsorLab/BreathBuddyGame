@@ -15,6 +15,7 @@ import SoundToggle from 'component/ui/home/SoundToggle'
 import { PlayerDTO } from 'services/API/definition/responseDTO'
 import supabaseAPIService from 'services/API/backend/supabaseAPIService'
 import { logger } from 'services/logger'
+import { GameState } from 'component/GameState'
 
 const ReminderText = {
 	firstRound: 'home_reminder_first_play',
@@ -130,6 +131,12 @@ export default class HomeScene extends Phaser.Scene {
 			this.scene.scene.registry.get('playToday')[0],
 			this.scene.scene.registry.get('playToday')[1],
 		)
+
+		this.registry.set('gameState', GameState.MENU)
+
+		if(!this.registry.get('gamesPlayedThisSession')) {
+			this.registry.set('gamesPlayedThisSession', 0)
+		}
 
 		// TODO: call api
 		this.playCount = this.scene.scene.registry.get('playCount')

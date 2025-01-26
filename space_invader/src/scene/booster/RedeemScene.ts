@@ -6,6 +6,7 @@ import boosterBar from 'component/booster/boosterBar'
 import { BoosterName } from 'component/booster/booster'
 import supabaseAPIService from 'services/API/backend/supabaseAPIService'
 import { logger } from 'services/logger'
+import { GameState } from 'component/GameState'
 
 export let boosters: BoosterName[] = []
 
@@ -216,6 +217,11 @@ export default class RedeemScene extends Phaser.Scene {
 						gameSession.booster_drop_id,
 					)
 					this.scene.scene.registry.set('boss_id', gameSession.boss_id)
+					
+					const gameCount = this.registry.get('gamesPlayedThisSession')
+					
+					this.registry.set('gamesPlayedThisSession', gameCount + 1)
+					this.registry.set('gameState', GameState.IN_GAME)
 				} catch (error) {
 					logger.error(this.scene.key, `Api call failed: ${error}`)
 				}
