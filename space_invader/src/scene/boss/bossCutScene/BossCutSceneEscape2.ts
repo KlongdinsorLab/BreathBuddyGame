@@ -59,7 +59,7 @@ export default class BossEscape2 extends Phaser.Scene {
 					this.scene.stop('bossScene')
 					const updatedCount = this.reloadCount - 1
 					if (updatedCount === 0) {
-						this.scene.launch('end game', { score: this.score })
+						this.scene.launch('end game', { score: this.score, isTimeout: false })
 						this.scene.stop()
 						return
 					}

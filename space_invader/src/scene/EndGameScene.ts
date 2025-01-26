@@ -37,14 +37,16 @@ export default class EndGameScene extends Phaser.Scene {
 	private levelUpPopup!: LevelUpPopup
 	private finishGameResponse!: FinishGameResponse
 
+	private isTimeout!: boolean
 	private isLoading!: boolean
 
 	constructor() {
 		super('end game')
 	}
 
-	init({ score }: { score: number }) {
+	init({ score, isTimeout }: { score: number, isTimeout: boolean }) {
 		this.score = score
+		this.isTimeout = isTimeout
 	}
 
 	preload() {
@@ -180,9 +182,21 @@ export default class EndGameScene extends Phaser.Scene {
 				logger.error(this.scene.key, `Api call failed: ${error}`)
 			}
 		}
-		await finishGame()
 
-		this.isHighScore = this.finishGameResponse?.is_high_score
+		const cancelGame = async () => {
+			try {
+				await apiService.endGameSession()
+			}
+			catch (error) {
+				logger.error(this.scene.key, `Api call failed: ${error}`)
+			}
+		}
+		
+		if(this.isTimeout) await cancelGame()
+		else await finishGame()
+
+
+		this.isHighScore = this.finishGameResponse?.is_high_score && !this.isTimeout
 
 		this.add
 			.tileSprite(0, 0, width, height, 'end_game_scene_bg')
@@ -230,7 +244,9 @@ export default class EndGameScene extends Phaser.Scene {
 		this.homeButton = new HomeButton(this)
 		this.vas = new vas(this)
 
-		if (this.finishGameResponse.total_games % VAS_COUNT == 0) {
+		if (!this.isTimeout && 
+			this.finishGameResponse.total_games % VAS_COUNT == 0
+		) {
 			this.homeButton.disable()
 			this.homeButton.hide()
 			this.restartButton.disable()
@@ -244,7 +260,9 @@ export default class EndGameScene extends Phaser.Scene {
 			this.vas.create()
 		}
 
-		if (this.isHeartEmpty) {
+		if (this.isHeartEmpty ||
+			this.isTimeout
+		) {
 			this.restartButton.hide()
 		}
 
@@ -260,7 +278,9 @@ export default class EndGameScene extends Phaser.Scene {
 			this.achievementPopup.setVisibleOff()
 		}
 
-		if (this.finishGameResponse?.level_up) {
+		if (!this.isTimeout && 
+			this.finishGameResponse?.level_up
+		) {
 			this.levelUpPopup = new LevelUpPopup(this, this.finishGameResponse.level)
 			this.levelUpPopup.create()
 			this.levelUpPopup.setVisibleOff()
@@ -345,7 +365,9 @@ export default class EndGameScene extends Phaser.Scene {
 
 		this.isHeartEmpty =
 			!this.heart1.getIsRecharged() && !this.heart2.getIsRecharged()
-		if (!this.isHeartEmpty) {
+		if (!this.isHeartEmpty &&
+			!this.isTimeout
+		) {
 			this.restartButton.show()
 		}
 
@@ -371,7 +393,7 @@ export default class EndGameScene extends Phaser.Scene {
 			return
 		}
 
-		if (this.finishGameResponse.total_games % VAS_COUNT != 0) {
+		if (!this.isTimeout && this.finishGameResponse.total_games % VAS_COUNT != 0) {
 			this.showUI()
 		}
 	}
@@ -380,6 +402,7 @@ export default class EndGameScene extends Phaser.Scene {
 		this.isHeartEmpty =
 			!this.heart1.getIsRecharged() && !this.heart2.getIsRecharged()
 		if (
+			!this.isTimeout &&
 			!this.isHeartEmpty &&
 			this.finishGameResponse.games_played_today.length < MAX_PLAYED
 		) {
