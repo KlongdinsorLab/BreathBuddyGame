@@ -87,6 +87,7 @@ export default class BossCutSceneVS extends Phaser.Scene {
 		)
 		this.bossVersion = this.boss.getVersion()
 
+		// eslint-disable-next-line @typescript-eslint/no-this-alias
 		const self = this
 		WebFont.load({
 			google: {
@@ -104,6 +105,7 @@ export default class BossCutSceneVS extends Phaser.Scene {
 				score: score,
 				playerX: playerX,
 				reloadCount: reloadCount,
+				isRestartedGame: this.scene.scene.registry.get('isRestartedGame'),
 			})
 		}, 3000)
 	}

@@ -207,11 +207,12 @@ export default class BossScene extends Phaser.Scene {
 
 		this.isCompleteItemTutorial = false
 
-		// TODO: remove this
-		boosters.forEach((booster) => {
-			const boosterUI = new BoosterUI(this, booster, { x: 594, y: 1142 })
-			boosterUI.create()
-		})
+		if (!this.scene.scene.registry.get('isRestartedGame')) {
+			boosters.forEach((booster) => {
+				const boosterUI = new BoosterUI(this, booster, { x: 594, y: 1142 })
+				boosterUI.create()
+			})
+		}
 
 		this.boosterEffect = this.scene.scene.registry.get('boosterEffect') ?? {
 			remainingUses: 0,

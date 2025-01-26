@@ -146,6 +146,7 @@ export default class TutorialControllerScene extends Phaser.Scene {
 				this.scene.start('game', {
 					event: this.event,
 					bossName: bossName,
+					isRestartedGame: this.scene.scene.registry.get('isRestartedGame'),
 				})
 				this.scene.stop()
 				this.scene.stop('tutorial character')
