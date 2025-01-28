@@ -22,6 +22,7 @@ export default class HomeButton extends Button {
 			.setOrigin(0.5, 0)
 		this.button.setInteractive()
 		this.button.on('pointerup', () => {
+			this.resetRegistry()
 			scene.scene.stop()
 			i18n.destroyEmitter()
 			scene.scene.start('home')
@@ -94,5 +95,12 @@ export default class HomeButton extends Button {
 		this.buttonLogo.setVisible(true)
 		this.buttonText.setVisible(true)
 		this.isActive = true
+	}
+
+	resetRegistry(): void {
+		this.scene.registry.set('isBoosterReceived', false)
+		this.scene.registry.set('boosterEffect', null)
+		this.scene.registry.set('score', 0)
+		this.scene.registry.set('lap', 0)
 	}
 }

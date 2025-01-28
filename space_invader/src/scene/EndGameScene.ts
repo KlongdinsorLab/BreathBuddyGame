@@ -296,9 +296,9 @@ export default class EndGameScene extends Phaser.Scene {
 			this.heart2.getBody().setVisible(false)
 		}
 
-		const self = this
+		console.log(this.finishGameResponse)
 
-		this.resetRegistry()
+		const self = this
 
 		WebFont.load({
 			google: {
@@ -315,13 +315,17 @@ export default class EndGameScene extends Phaser.Scene {
 				}
 
 				self.vas?.initFontStyle()
-				self.rewardDialog?.initFontStyle()
+				if(self.registry.get('isBoosterReceived')) self.rewardDialog?.initFontStyle()
 				self.heart1.initFontStyle()
 				self.heart2.initFontStyle()
 				self.restartButton.initFontStyle()
 				self.homeButton.initFontStyle()
-				self.achievementPopup?.initFontStyle()
-				self.levelUpPopup?.initFontStyle()
+				if(self.finishGameResponse?.new_achievements) {
+					self.achievementPopup?.initFontStyle()
+				} 
+				if(self.finishGameResponse?.level_up) {
+					self.levelUpPopup?.initFontStyle()
+				} 
 
 				self.victoryText
 					.setStyle({
@@ -462,12 +466,5 @@ export default class EndGameScene extends Phaser.Scene {
 		})
 		this.sortDate(playTodayDate)
 		return playTodayDate
-	}
-
-	resetRegistry() {
-		this.registry.set('isBoosterReceived', false)
-		this.registry.set('boosterEffect', null)
-		this.registry.set('score', 0)
-		this.registry.set('lap', 0)
 	}
 }
