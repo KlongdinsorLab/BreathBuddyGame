@@ -250,12 +250,13 @@ export default class boosterBar {
 					.createTranslatedText(
 						this.scene,
 						this.position.x + (MARGIN * 2) / 3 + 128,
-						this.position.y + this.gapSize.height * 2 + MARGIN / 2.5 + 6,
+						this.position.y + this.gapSize.height * 2 + MARGIN / 2.5 + 6 - 10,
 						text,
 					)
 					.setAlign('start')
 					.setOrigin(0, 0)
 					.setColor('#FFFFFF')
+					.setPadding(0, 20, 0, 10)
 				this.descriptionText.name = this.boosters[index].getFrame()
 				this.timeoutEvent = this.scene.time.addEvent({
 					delay: 3000,
@@ -271,22 +272,24 @@ export default class boosterBar {
 			this.descriptionTitle = I18nSingleton.getInstance()
 				.createTranslatedText(
 					this.scene,
-					this.position.x + (MARGIN * 2) / 3 + 128,
-					this.position.y + this.gapSize.height * 2 + MARGIN / 2.5,
+					this.position.x + (MARGIN * 2) / 3 + 128 + 5,
+					this.position.y + this.gapSize.height * 2 + MARGIN / 2.5 - 15,
 					title,
 				)
 				.setAlign('start')
 				.setOrigin(0, 0)
+				.setPadding(0, 20, 0, 10)
 			this.descriptionText = I18nSingleton.getInstance()
 				.createTranslatedText(
 					this.scene,
-					this.position.x + (MARGIN * 2) / 3 + 128,
-					this.position.y + this.gapSize.height * 2 + MARGIN / 2.5 + 36,
+					this.position.x + (MARGIN * 2) / 3 + 128 + 5,
+					this.position.y + this.gapSize.height * 2 + MARGIN / 2.5 + 36 - 10,
 					text,
 				)
 				.setAlign('start')
 				.setOrigin(0, 0)
 				.setColor('#57453B')
+				.setPadding(0, 20, 0, 10)
 			this.descriptionTitle.name = this.boosters[index].getFrame()
 			this.descriptionText.name = this.boosters[index].getFrame()
 			this.setDescriptionAmount(index)
@@ -295,11 +298,12 @@ export default class boosterBar {
 				.createTranslatedText(
 					this.scene,
 					(this.position.x * 5.6) / 2 - 88,
-					this.position.y + this.gapSize.height * 2 + MARGIN + 8,
+					this.position.y + this.gapSize.height * 2 + MARGIN + 8 - 10,
 					'booster_description_default',
 				)
 				.setAlign('center')
 				.setOrigin(0, 0)
+				.setPadding(0, 20, 0, 10)
 		}
 		this.initFontStyle()
 	}
@@ -326,12 +330,13 @@ export default class boosterBar {
 		this.descriptionAmount = I18nSingleton.getInstance()
 			.createTranslatedText(
 				this.scene,
-				this.position.x + (MARGIN * 2) / 3 + 128,
-				this.position.y + this.gapSize.height * 2 + MARGIN * 2 - 6,
+				this.position.x + (MARGIN * 2) / 3 + 128 + 5,
+				this.position.y + this.gapSize.height * 2 + MARGIN * 2 - 6 - 10,
 				text,
 			)
 			.setAlign('start')
 			.setOrigin(0, 0)
+			.setPadding(0, 20, 0, 10)
 	}
 
 	boosterFontStyle() {
