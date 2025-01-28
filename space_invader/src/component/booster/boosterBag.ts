@@ -195,12 +195,13 @@ export default class BoosterBag {
 		})
 		this.descriptionBoosterUI.create()
 		this.descriptionText = I18nSingleton.getInstance()
-			.createTranslatedText(this.scene, 252, 998, 'booster_timeout')
+			.createTranslatedText(this.scene, 252, 998 - 10, 'booster_timeout')
 			.setOrigin(0)
 			.setAlign('left')
 			.setSize(334, 96)
 			.setFontSize(24)
 			.setColor('#FFFFFF')
+			.setPadding(0, 20, 0, 10)
 		this.updateFont()
 	}
 	setDescription(boosterUI: BoosterUI): void {
@@ -219,19 +220,21 @@ export default class BoosterBag {
 		})
 		this.descriptionBoosterUI.create()
 		this.descriptionTitle = I18nSingleton.getInstance()
-			.createTranslatedText(this.scene, 252, 986, title)
+			.createTranslatedText(this.scene, 252 + 5, 986 - 10, title)
 			.setOrigin(0)
 			.setAlign('left')
 			.setSize(334, 96)
 			.setFontSize(28)
 			.setColor('#57453B')
+			.setPadding(0, 20, 0, 10)
 		this.descriptionText = I18nSingleton.getInstance()
-			.createTranslatedText(this.scene, 252, 1028, text)
+			.createTranslatedText(this.scene, 252 + 5, 1028 - 10, text)
 			.setOrigin(0)
 			.setAlign('left')
 			.setSize(334, 96)
 			.setFontSize(28)
 			.setColor('#57453B')
+			.setPadding(0, 20, 0, 10)
 		let amountText
 		if (boosterUI.getAmount() === 0) {
 			const [hours, minutes, seconds] = boosterUI
@@ -250,12 +253,13 @@ export default class BoosterBag {
 			amountText = i18next.t('booster_description_amount', { amount })
 		}
 		this.descriptionAmount = I18nSingleton.getInstance()
-			.createTranslatedText(this.scene, 252, 1064, amountText)
+			.createTranslatedText(this.scene, 252 + 5, 1064 - 10, amountText)
 			.setOrigin(0)
 			.setAlign('left')
 			.setSize(334, 96)
 			.setFontSize(28)
 			.setColor('#D35E24')
+			.setPadding(0, 20, 0, 10)
 		this.updateFont()
 	}
 	nextPage(): void {

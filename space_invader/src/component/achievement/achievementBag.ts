@@ -454,14 +454,16 @@ export default class AchievementBag {
 		)
 		this.descriptionAchievementUI.create()
 		this.descriptionTitle = I18nSingleton.getInstance()
-			.createTranslatedText(this.scene, 216, 984, title)
+			.createTranslatedText(this.scene, 216 + 5, 984 - 10, title)
 			.setOrigin(0)
 			.setAlign('left')
+			.setPadding(0, 20, 0, 10)
 
 		this.descriptionText = I18nSingleton.getInstance()
-			.createTranslatedText(this.scene, 216, 1022, text)
+			.createTranslatedText(this.scene, 216 + 5, 1022 - 10, text)
 			.setOrigin(0)
 			.setAlign('left')
+			.setPadding(0, 20, 0, 10)
 
 		if (
 			this.unlockedAchievementJson.find(
@@ -469,9 +471,10 @@ export default class AchievementBag {
 			) === undefined
 		) {
 			this.descriptionLockText = I18nSingleton.getInstance()
-				.createTranslatedText(this.scene, 216, 1064, 'mybag_achievement_locked')
+				.createTranslatedText(this.scene, 216 + 5, 1064 - 10, 'mybag_achievement_locked')
 				.setOrigin(0)
 				.setAlign('left')
+				.setPadding(0, 20, 0, 10)
 		}
 
 		this.updateFont()
