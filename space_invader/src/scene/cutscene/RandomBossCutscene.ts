@@ -117,7 +117,7 @@ export default class RandomBossCutScene extends Phaser.Scene {
 			.createTranslatedText(
 				this,
 				624 / 2 + 48,
-				height - 200,
+				height - 200 - 10,
 				'random_scene_dialog',
 				{
 					username: username,
@@ -126,6 +126,7 @@ export default class RandomBossCutScene extends Phaser.Scene {
 			)
 			.setAlign('center')
 			.setOrigin(0.5, 0.5)
+			.setPadding(0, 20, 0, 10)
 
 		const self = this
 		WebFont.load({
