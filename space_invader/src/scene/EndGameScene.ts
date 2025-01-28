@@ -296,8 +296,6 @@ export default class EndGameScene extends Phaser.Scene {
 			this.heart2.getBody().setVisible(false)
 		}
 
-		console.log(this.finishGameResponse)
-
 		const self = this
 
 		WebFont.load({
@@ -320,12 +318,8 @@ export default class EndGameScene extends Phaser.Scene {
 				self.heart2.initFontStyle()
 				self.restartButton.initFontStyle()
 				self.homeButton.initFontStyle()
-				if(self.finishGameResponse?.new_achievements) {
-					self.achievementPopup?.initFontStyle()
-				} 
-				if(self.finishGameResponse?.level_up) {
-					self.levelUpPopup?.initFontStyle()
-				} 
+				if(self.finishGameResponse?.new_achievements) self.achievementPopup?.initFontStyle()
+				if(self.finishGameResponse?.level_up) self.levelUpPopup?.initFontStyle()
 
 				self.victoryText
 					.setStyle({
