@@ -186,12 +186,13 @@ export default class HomeScene extends Phaser.Scene {
 			.createTranslatedText(
 				this,
 				width / 2,
-				628,
+				628 - 20,
 				ReminderText[this.reminderCase],
 			)
 			.setAlign('center')
 			.setOrigin(0.5, 0)
 			.setVisible(this.isShowReminder)
+			.setPadding(0, 20, 0, 10)
 
 		this.rankingButton = new RankingButton(this)
 		this.instructionButton = new InstructionButton(this)

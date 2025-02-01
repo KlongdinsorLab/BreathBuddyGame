@@ -50,11 +50,12 @@ export default class RestartButton extends Button {
 			.createTranslatedText(
 				scene,
 				width / 2 + MARGIN / 2,
-				900 + this.button.height / 2,
+				900 + this.button.height / 2 - 5,
 				'restart',
 			)
 			.setAlign('center')
 			.setOrigin(0.5, 0.5)
+			.setPadding(0, 20, 0, 10)
 
 		this.buttonLogo = scene.add
 			.image(

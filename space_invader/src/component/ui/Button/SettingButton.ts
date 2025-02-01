@@ -22,9 +22,10 @@ export default class SettingButton extends Button {
 			.image(448 + 64, 966 + 48, 'landing_page', 'logo_button_setting.png')
 			.setOrigin(0.5, 0.5)
 		this.buttonText = I18nSingleton.getInstance()
-			.createTranslatedText(scene, 448 + 64, 966 + 48 + 24, 'home_setting')
+			.createTranslatedText(scene, 448 + 64, 966 + 48 + 24 - 10, 'home_setting')
 			.setAlign('center')
 			.setOrigin(0.5, 0)
+			.setPadding(0, 20, 0, 10)
 		this.button.setInteractive()
 		this.button.on('pointerdown', () => {
 			this.scene.scene.start('setting', { key: this.scene.scene.key })

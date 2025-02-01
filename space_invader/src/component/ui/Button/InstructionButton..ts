@@ -34,11 +34,12 @@ export default class InstructionButton extends Button {
 			.createTranslatedText(
 				scene,
 				width - 160 + MARGIN + 8,
-				height - 2 * MARGIN,
+				height - 2 * MARGIN - 5,
 				'home_instruction',
 			)
 			.setAlign('center')
 			.setOrigin(0.5, 0.5)
+			.setPadding(0, 20, 0, 10)
 
 		this.button.setInteractive()
 		this.button.on('pointerup', () => {

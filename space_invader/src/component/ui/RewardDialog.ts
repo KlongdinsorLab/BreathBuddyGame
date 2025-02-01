@@ -58,7 +58,7 @@ export default class RewardDialog {
 			.createTranslatedText(
 				scene,
 				252,
-				this.descriptionBoosterUI.getBody().y,
+				this.descriptionBoosterUI.getBody().y - 10,
 				title,
 			)
 			.setOrigin(0)
@@ -66,11 +66,12 @@ export default class RewardDialog {
 			.setSize(334, 96)
 			.setFontSize(28)
 			.setColor('#57453B')
+			.setPadding(0, 20, 0, 10)
 		this.descriptionText = i18n
 			.createTranslatedText(
 				scene,
 				252,
-				this.descriptionBoosterUI.getBody().y + 42,
+				this.descriptionBoosterUI.getBody().y + 42 - 10,
 				text,
 			)
 			.setOrigin(0)
@@ -78,6 +79,7 @@ export default class RewardDialog {
 			.setSize(334, 96)
 			.setFontSize(28)
 			.setColor('#57453B')
+			.setPadding(0, 20, 0, 10)
 	}
 
 	getBoosterName(boosterId: number): BoosterName {

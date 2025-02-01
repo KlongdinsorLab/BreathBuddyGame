@@ -22,9 +22,10 @@ export default class AchievementButton extends Button {
 			.image(296 + 64, 966 + 48, 'landing_page', 'logo_button_achievement.png')
 			.setOrigin(0.5, 0.5)
 		this.buttonText = I18nSingleton.getInstance()
-			.createTranslatedText(scene, 296 + 64, 966 + 48 + 24, 'home_achievement')
+			.createTranslatedText(scene, 296 + 64, 966 + 48 + 24 - 10, 'home_achievement')
 			.setAlign('center')
 			.setOrigin(0.5, 0)
+			.setPadding(0, 20, 0, 10)
 		this.button.setInteractive()
 		this.button.on('pointerdown', () => {
 			this.scene.scene.start('mybag', { key: this.scene.scene.key })

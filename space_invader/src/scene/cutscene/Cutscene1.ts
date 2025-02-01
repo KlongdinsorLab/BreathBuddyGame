@@ -43,14 +43,16 @@ export default class Cutscene1 extends Phaser.Scene {
 		textBoxBorder.strokeRoundedRect(48, 958, 624, 240, 40)
 
 		const cutsceneText = i18n
-			.createTranslatedText(this, width / 2, 1050, 'cutscene1_dialog')
+			.createTranslatedText(this, width / 2, 1050 - 10, 'cutscene1_dialog')
 			.setOrigin(0.5, 0)
 			.setAlpha(1)
+			.setPadding(0, 20, 0, 10)
 
 		const continueText = i18n
-			.createTranslatedText(this, width / 2, 1155, 'tutorial_continue')
+			.createTranslatedText(this, width / 2, 1155 - 10, 'tutorial_continue')
 			.setOrigin(0.5, 0)
 			.setAlpha(0)
+			.setPadding(0, 20, 0, 10)
 
 		this.tweens.add({
 			targets: continueText,
