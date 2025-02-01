@@ -109,7 +109,7 @@ export class B4Boss extends Boss {
 		// TODO fixes me
 		// const randomSoundIndex = Math.floor(Math.random() * 4)
 		// this.soundManager.play(this.bossHitSounds[randomSoundIndex], false)
-		this.bossSound.play(`b4-hit${Math.floor(Math.random() * 4) + 1}`)
+		this.bossSound.play(`b1-hit${Math.floor(Math.random() * 4) + 1}`)
 
 		this.enemy.stop()
 		// this.enemy.setTexture('boss')
