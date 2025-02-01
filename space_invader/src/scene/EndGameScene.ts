@@ -168,7 +168,7 @@ export default class EndGameScene extends Phaser.Scene {
 			try {
 				this.finishGameResponse = (
 					await apiService.finishGameSession({
-						score: this.score,
+						score: Math.round(this.score),
 						lap: this.scene.scene.registry.get('lap'),
 						is_booster_received: this.registry.get('isBoosterReceived'),
 					})
