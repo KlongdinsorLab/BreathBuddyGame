@@ -39,6 +39,7 @@ export default class RestartButton extends Button {
 				this.scene.scene.key,
 				`Api call success, Response: ${JSON.stringify(gameSession)}`,
 			)
+			this.resetRegistry(scene)
 			scene.registry.set('booster_drop_id', gameSession.booster_drop_id)
 			scene.registry.set('boss_id', gameSession.boss_id)
 			scene.registry.set('boosterEffect', null)
