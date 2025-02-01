@@ -223,7 +223,7 @@ export class B3BossVersion2 extends BossVersion {
 		boss.play('boss-hit')
 
 		setTimeout(() => {
-			bossSound.play('b3-escape-voice')
+			bossSound.play('b1-escape-voice')
 			// soundManager.play(bossEscapeVoice, false)
 		}, 500)
 

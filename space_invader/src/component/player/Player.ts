@@ -208,7 +208,7 @@ export default class Player {
 	}
 
 	damaged(): void {
-		this.playerSound.play(`mc-hit${Math.floor(Math.random() * 3) + 1}`)
+		this.playerSound.play(`mc1-hit${Math.floor(Math.random() * 3) + 1}`)
 		this.player.play('hurt', true)
 		this.playerHitTweens.resume()
 		this.player.alpha = 0.8
@@ -365,7 +365,7 @@ export default class Player {
 
 	playVsScene(scene: Phaser.Scene): void {
 		setTimeout(() => {
-			this.playerSound.play('mc-vs')
+			this.playerSound.play('mc1-vs')
 		}, 2000)
 
 		const playerImage = scene.add

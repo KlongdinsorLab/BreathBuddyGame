@@ -108,7 +108,7 @@ export class B3Boss extends Boss {
 		// const randomSoundIndex = Math.floor(Math.random() * 4)
 		// this.soundManager.play(this.bossHitSounds[randomSoundIndex], false)
 
-		this.bossSound.play(`B3-hit${Math.floor(Math.random() * 4) + 1}`)
+		this.bossSound.play(`b1-hit${Math.floor(Math.random() * 4) + 1}`)
 
 		this.enemy.stop()
 		this.enemy.play('boss-hit')
